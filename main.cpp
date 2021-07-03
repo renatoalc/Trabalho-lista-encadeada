@@ -105,55 +105,9 @@ class Lista
 
 };
 
-struct tComplexos{
-  double real;
-  double imag;
-};
-
-void LerComplexo (struct tComplexos *nc){
-
-cout << "Parte real" << endl;
-cin >> nc->real;
-cout << "Parte imaginaria" << endl;
-cin >> nc->imag;
-cout << endl;
-
-}
-//SOMA
-struct tComplexos* Soma (struct tComplexos *nc1, struct tComplexos *nc2){
-  struct tComplexos *ncRes = (struct tComplexos*)malloc(sizeof(struct tComplexos));
-  ncRes->real = nc1->real + nc2->real;
-  ncRes->imag = nc1->imag + nc2->imag;
-  return ncRes;
-}
-
-//SUBTRAÇÃO
-struct tComplexos* Subtração (struct tComplexos *nc1, struct tComplexos *nc2){
-  struct tComplexos *ncRes = (struct tComplexos*)malloc(sizeof(struct tComplexos));
-  ncRes->real = nc1->real - nc2->real;
-  ncRes->imag = nc1->imag - nc2->imag;
-  return ncRes;
-}
-
-//MULTIPLICAÇÃO
-struct tComplexos* Multiplicação (struct tComplexos *nc1, struct tComplexos *nc2){
-  struct tComplexos *ncRes = (struct tComplexos*)malloc(sizeof(struct tComplexos));
-  ncRes->real = (nc1->real * nc2->real)+(nc1->imag * nc2->imag * -1);
-  ncRes->imag = (nc1->real * nc2->imag)+(nc1->imag * nc2->real);
-  return ncRes;
-}
-
-//DIVISÃO
-struct tComplexos* Divisão (struct tComplexos *nc1, struct tComplexos *nc2){
-  struct tComplexos *ncRes = (struct tComplexos*)malloc(sizeof(struct tComplexos));
-  ncRes->real = ((nc1->real * nc2->real)+(nc2->imag * nc1->imag))/((nc2->real * nc2->real)+(nc2->imag * nc2->imag));
-  ncRes->imag = ((nc1->imag * nc2->real)-(nc1->real * nc2->imag))/((nc2->real * nc2->real)+(nc2->imag * nc2->imag));
-  return ncRes;
-}
 
 int main() {
-  int quantidade,num,num2,res,valor,i=0;
-  struct tComplexos numc,n1,n2,*res;
+  int quantidade,valor,num,num2,i=0;
   char op;
 
   Lista A;
@@ -163,30 +117,26 @@ int main() {
   cout<<"INFORME OS NÚMEROS COMPLEXOS"<<endl;
 
   while(quantidade>i){
-    LerComplexo (&numc);
-    A.insereNoInicio(&numc);
+    cin>>valor;
+    A.insereNoInicio(valor);
     i=i+1;
   }
   i=0;
 
   cout<<"INFORME UM NÚMERO COMPLEXO DA LISTA"<<endl;
-  LerComplexo (&n1);
+  cin>>num;
 
-  if(A.existeElemento(&n1))
+  if(A.existeElemento(num)){
     cout<<"INFORME OUTRO NÚMERO COMPLEXO E A OPERAÇÃO ((+,-,*,/)) A SER REALIZADA COM O NÚMERO COMPLEXO DA LISTA"<<endl;
-    LerComplexo (&n2)>>op;
+    cin>>num2>>op;
+  }    
+  else{
+    cout<<"NÚMERO COMPLEXO "<<num<<" NÃO EXISTE NA LISTA"<<endl;
+  }
 
-    if (op == '+')
-      res = Soma (&num,&num2);    
+  //OPERAÇÕES
+  
 
-    if (op == '-')
-      res = Subtração (&num,&num2);    
-
-    if (op == '*')
-      res = Multiplicação (&num,&num2);    
-
-    if (op == '/')
-      res = Divisão (&num,&num2);
     
   
 
