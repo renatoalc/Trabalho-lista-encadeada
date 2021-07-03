@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 class No
@@ -54,7 +55,7 @@ class Lista
 
   void imprimirElementos()
   {
-    cout<<"ELEMENTOS DA LISTA"<<endl;
+    ofstream Gravar("BancoDados.txt");
     No* i=inicio;
     if(seVazia())
     {
@@ -64,10 +65,9 @@ class Lista
     {
       while(i)
       {
-        cout<< i->obterValor()<<endl;
+        Gravar<< i->obterValor()<<endl;
         i = i->obterProximo();
-      }
-      cout<<endl;
+      }      
     }
   }
 
@@ -105,47 +105,58 @@ class Lista
 
 };
 
+  int Soma(int n1,int n2){
+    int res = n1+n2;
+    return res;
+  }
+
+  int Subtração(int n1,int n2){
+    int res = n1-n2;
+    return res;
+  }
+
+  int Multiplicação(int n1,int n2){
+    int res = n1*n2;
+    return res;
+  }
+
+  int Divisão(int n1,int n2){
+    double res = n1/n2;
+    return res;
+  }
+
 
 int main() {
-  int quantidade,valor,num,num2,i=0;
+  int quantidade,opção,valor,num,num2,i=0;
+  double res;
   char op;
+  ifstream Ler("BancoDados.txt"); 
 
   Lista A;
-  
-  cout<<"QUANTIDADE DE NÚMEROS COMPLEXOS?"<<endl;
-  cin>>quantidade;
-  cout<<"INFORME OS NÚMEROS COMPLEXOS"<<endl;
 
-  while(quantidade>i){
-    cin>>valor;
-    A.insereNoInicio(valor);
-    i=i+1;
+  cout<<"Gravar(1), Ler(2) ou encerrar(0)? "<<endl;
+  cin>>opção;
+
+  while(opção != 0){
+    if(opção == 1){
+      cout<<"Quantidade de números complexos?"<<endl;
+      cin>>quantidade;
+      cout<<"Informe os números complexos"<<endl;
+      while(quantidade>i){
+        cin>>valor;
+        A.insereNoInicio(valor);
+        i=i+1;
+      }
+      i=0;
+      A.imprimirElementos();
+      cout<<"Lista gravada no arquivo BancoDados.txt !"<<endl;
+
+    }
+    else{
+      
+    }
+
   }
-  i=0;
-
-  cout<<"INFORME UM NÚMERO COMPLEXO DA LISTA"<<endl;
-  cin>>num;
-
-  if(A.existeElemento(num)){
-    cout<<"INFORME OUTRO NÚMERO COMPLEXO E A OPERAÇÃO ((+,-,*,/)) A SER REALIZADA COM O NÚMERO COMPLEXO DA LISTA"<<endl;
-    cin>>num2>>op;
-  }    
-  else{
-    cout<<"NÚMERO COMPLEXO "<<num<<" NÃO EXISTE NA LISTA"<<endl;
-  }
-
-  //OPERAÇÕES
-  
-
-    
-  
-
-
-
-
-
-
-
-
-
+    cout<<"Gravar(1), Ler(2) ou encerrar(0)? "<<endl;
+    cin>>opção;
 }
