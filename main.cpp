@@ -7,15 +7,10 @@ class No
   int valor;
   No* proximo;
 
-  No(int elemento)
+  No(int valor)
   {
-    this->valor=elemento;
+    this->valor=valor;
     this->proximo=NULL;
-  }
-
-  void definirProximo(No* end)
-  {
-    proximo=end;
   }
 
   int obterValor()
@@ -27,6 +22,11 @@ class No
   {
     return proximo;
   }
+
+  void definirProximo(No* prox)
+  {
+    proximo=prox;
+  }
 };
 
 class Lista
@@ -34,6 +34,12 @@ class Lista
   public:
   No* inicio;
   No* fim;
+
+  Lista()
+  {
+    inicio = NULL;
+    fim=NULL;
+  }
 
   Lista(int num)
   {
@@ -65,6 +71,22 @@ class Lista
     }
   }
 
+  bool existeElemento(int valor)
+  {
+    No* i = inicio;
+    while(i)
+    {
+      if(i->obterValor()==valor)
+      {
+        return true;
+      }else
+      {
+        i = i->obterProximo();
+      }
+    }
+    return false;
+  }
+
   void insereNoInicio(int valor)
   {
     No* novo = new No(valor);
@@ -83,6 +105,97 @@ class Lista
 
 };
 
+struct tComplexos{
+  double real;
+  double imag;
+};
+
+void LerComplexo (struct tComplexos *nc){
+
+cout << "Parte real" << endl;
+cin >> nc->real;
+cout << "Parte imaginaria" << endl;
+cin >> nc->imag;
+cout << endl;
+
+}
+//SOMA
+struct tComplexos* Soma (struct tComplexos *nc1, struct tComplexos *nc2){
+  struct tComplexos *ncRes = (struct tComplexos*)malloc(sizeof(struct tComplexos));
+  ncRes->real = nc1->real + nc2->real;
+  ncRes->imag = nc1->imag + nc2->imag;
+  return ncRes;
+}
+
+//SUBTRAÇÃO
+struct tComplexos* Subtração (struct tComplexos *nc1, struct tComplexos *nc2){
+  struct tComplexos *ncRes = (struct tComplexos*)malloc(sizeof(struct tComplexos));
+  ncRes->real = nc1->real - nc2->real;
+  ncRes->imag = nc1->imag - nc2->imag;
+  return ncRes;
+}
+
+//MULTIPLICAÇÃO
+struct tComplexos* Multiplicação (struct tComplexos *nc1, struct tComplexos *nc2){
+  struct tComplexos *ncRes = (struct tComplexos*)malloc(sizeof(struct tComplexos));
+  ncRes->real = (nc1->real * nc2->real)+(nc1->imag * nc2->imag * -1);
+  ncRes->imag = (nc1->real * nc2->imag)+(nc1->imag * nc2->real);
+  return ncRes;
+}
+
+//DIVISÃO
+struct tComplexos* Divisão (struct tComplexos *nc1, struct tComplexos *nc2){
+  struct tComplexos *ncRes = (struct tComplexos*)malloc(sizeof(struct tComplexos));
+  ncRes->real = ((nc1->real * nc2->real)+(nc2->imag * nc1->imag))/((nc2->real * nc2->real)+(nc2->imag * nc2->imag));
+  ncRes->imag = ((nc1->imag * nc2->real)-(nc1->real * nc2->imag))/((nc2->real * nc2->real)+(nc2->imag * nc2->imag));
+  return ncRes;
+}
+
 int main() {
-  cout << "Hello World!\n";
+  int quantidade,num,num2,res,valor,i=0;
+  struct tComplexos numc,n1,n2,*res;
+  char op;
+
+  Lista A;
+  
+  cout<<"QUANTIDADE DE NÚMEROS COMPLEXOS?"<<endl;
+  cin>>quantidade;
+  cout<<"INFORME OS NÚMEROS COMPLEXOS"<<endl;
+
+  while(quantidade>i){
+    LerComplexo (&numc);
+    A.insereNoInicio(&numc);
+    i=i+1;
+  }
+  i=0;
+
+  cout<<"INFORME UM NÚMERO COMPLEXO DA LISTA"<<endl;
+  LerComplexo (&n1);
+
+  if(A.existeElemento(&n1))
+    cout<<"INFORME OUTRO NÚMERO COMPLEXO E A OPERAÇÃO ((+,-,*,/)) A SER REALIZADA COM O NÚMERO COMPLEXO DA LISTA"<<endl;
+    LerComplexo (&n2)>>op;
+
+    if (op == '+')
+      res = Soma (&num,&num2);    
+
+    if (op == '-')
+      res = Subtração (&num,&num2);    
+
+    if (op == '*')
+      res = Multiplicação (&num,&num2);    
+
+    if (op == '/')
+      res = Divisão (&num,&num2);
+    
+  
+
+
+
+
+
+
+
+
+
 }
