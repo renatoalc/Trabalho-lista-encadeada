@@ -121,20 +121,21 @@ class Lista
   }
 
   int Divisão(int n1,int n2){
-    double res = n1/n2;
+    float res = n1/n2;
     return res;
   }
 
 
 int main() {
   int quantidade,opção,valor,num,num2,i=0;
-  double res;
+  float res;
   char op;
   ifstream Ler("BancoDados.txt"); 
 
   Lista A;
 
-  cout<<"Gravar(1), Ler(2) ou encerrar(0)? "<<endl;
+  cout<<"Digite a opção:"<<endl;
+  cout<<"[1] - Gravar"<<endl<<"[2] - Ler"<<endl<<"[0] - Encerrar"<<endl;
   cin>>opção;
 
   while(opção != 0){
@@ -150,13 +151,49 @@ int main() {
       i=0;
       A.imprimirElementos();
       cout<<"Lista gravada no arquivo BancoDados.txt !"<<endl;
-
     }
     else{
-      
-    }
+       while(!Ler.eof()){
+         Ler>>valor;
+	       A.insereNoInicio(valor);
+        }
 
-  }
+      if(A.seVazia()){
+        cout<<"A lista está vazia!"<<endl;
+      }
+      else{//Se a lista foi lida e não está vazia, então faz as operações
+        cout<<"Escolha um número da lista"<<endl;
+        cin>>num;
+        if(A.existeElemento(num)){
+          cout<<"Informe outro número e a operação desejada(+,-,*,/) com o número da lista escolhido"<<endl;
+          cin>>num2;
+          cin>>op;
+
+          if (op=='+'){
+            res = Soma(num,num2);      
+          }
+
+          if (op=='-'){
+            res = Subtração(num,num2);      
+          }
+
+          if (op=='*'){
+            res = Multiplicação(num,num2);      
+          }
+
+          if (op=='/'){
+            res = Divisão(num,num2);      
+          }
+
+          cout<<"Resultado da operação: "<<res<<endl;
+
+        }
+        else{
+          cout<<"Número escolhido não existe na lista!"<<endl;
+        }
+      }      
+    }
     cout<<"Gravar(1), Ler(2) ou encerrar(0)? "<<endl;
     cin>>opção;
+  }
 }
