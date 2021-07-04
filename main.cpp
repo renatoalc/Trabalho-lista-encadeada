@@ -47,7 +47,7 @@ class Lista
     inicio = new No(num);
     fim = inicio;
   }
- 
+
   bool seVazia()
   {
     return (inicio == NULL);
@@ -130,16 +130,17 @@ int main() {
   int quantidade,opção,valor,num,num2,i=0;
   double res;
   char op;
-  ifstream Ler("BancoDados.txt"); 
+  ifstream Ler("BancoDados.txt");
 
   Lista A;
-
+  
   cout<<"Escolha uma opção"<<endl;
   cout<<"[1] - Gravar"<<endl<<"[2] - Ler"<<endl<<"[0] - Encerrar"<<endl;
   cin>>opção;
 
   while(opção != 0){
-    if(opção == 1){
+    if(opção == 1){//OPÇÃO GRAVAR NO ARQUIVO
+
       cout<<"Quantidade de números da lista?"<<endl;
       cin>>quantidade;
       cout<<"Informe os números da lista."<<endl;
@@ -152,16 +153,15 @@ int main() {
       A.imprimirElementos();
       cout<<"Lista gravada no arquivo BancoDados.txt !"<<endl;
     }
-    if(opção == 2){
-       while(!Ler.eof()){
+    if(opção == 2){//OPÇÃO DE LEITURA
+       while(!Ler.eof()){//Lendo dados do arquivo e inserindo na lista encadeada
          Ler>>valor;
 	       A.insereNoInicio(valor);
         }
-
       if(A.seVazia()){
         cout<<"A lista está vazia!"<<endl;
       }
-      else{//Se a lista foi lida e não está vazia, então faz as operações
+      else{//Se o arquivo foi lido e não está vazio, então faz-se as operações
         cout<<"Escolha um número da lista!"<<endl;
         cin>>num;
         if(A.existeElemento(num)){
