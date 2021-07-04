@@ -105,44 +105,44 @@ class Lista
 
 };
 
-  int Soma(int n1,int n2){
-    int res = n1+n2;
-    return res;
-  }
+int Soma(int n1,int n2){
+  float res = n1+n2;
+  return res;
+}
 
-  int Subtração(int n1,int n2){
-    int res = n1-n2;
-    return res;
-  }
+int Subtração(int n1,int n2){
+  float res = n1-n2;
+  return res;
+}
 
-  int Multiplicação(int n1,int n2){
-    int res = n1*n2;
-    return res;
-  }
+int Multiplicação(int n1,int n2){
+  float res = n1*n2;
+  return res;
+}
 
-  int Divisão(int n1,int n2){
-    float res = n1/n2;
-    return res;
-  }
+int Divisão(int n1,int n2){
+  double res = n1/n2;
+  return res;
+}
 
 
 int main() {
   int quantidade,opção,valor,num,num2,i=0;
-  float res;
+  double res;
   char op;
   ifstream Ler("BancoDados.txt"); 
 
   Lista A;
 
-  cout<<"Digite a opção:"<<endl;
+  cout<<"Escolha uma opção"<<endl;
   cout<<"[1] - Gravar"<<endl<<"[2] - Ler"<<endl<<"[0] - Encerrar"<<endl;
   cin>>opção;
 
   while(opção != 0){
     if(opção == 1){
-      cout<<"Quantidade de números complexos?"<<endl;
+      cout<<"Quantidade de números da lista?"<<endl;
       cin>>quantidade;
-      cout<<"Informe os números complexos"<<endl;
+      cout<<"Informe os números da lista."<<endl;
       while(quantidade>i){
         cin>>valor;
         A.insereNoInicio(valor);
@@ -152,7 +152,7 @@ int main() {
       A.imprimirElementos();
       cout<<"Lista gravada no arquivo BancoDados.txt !"<<endl;
     }
-    else{
+    if(opção == 2){
        while(!Ler.eof()){
          Ler>>valor;
 	       A.insereNoInicio(valor);
@@ -162,10 +162,10 @@ int main() {
         cout<<"A lista está vazia!"<<endl;
       }
       else{//Se a lista foi lida e não está vazia, então faz as operações
-        cout<<"Escolha um número da lista"<<endl;
+        cout<<"Escolha um número da lista!"<<endl;
         cin>>num;
         if(A.existeElemento(num)){
-          cout<<"Informe outro número e a operação desejada(+,-,*,/) com o número da lista escolhido"<<endl;
+          cout<<"Informe outro número e a operação desejada(+,-,*,/)."<<endl;
           cin>>num2;
           cin>>op;
 
@@ -193,7 +193,9 @@ int main() {
         }
       }      
     }
-    cout<<"Gravar(1), Ler(2) ou encerrar(0)? "<<endl;
+    cout<<endl;
+    cout<<"Digite uma opção"<<endl;
+    cout<<"[1] - Gravar"<<endl<<"[2] - Ler"<<endl<<"[0] - Encerrar"<<endl;
     cin>>opção;
   }
 }
